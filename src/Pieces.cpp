@@ -1,3 +1,5 @@
+#include "Pieces.h"
+
 /*
 [kind][rotation][horizontal][vertical]
 */
