@@ -1,0 +1,25 @@
+# Compiled object files
+*.o
+
+# Executable files
+*.exe
+
+# Build directories
+/build/
+/bin/
+/obj/
+
+# Visual Studio Code settings
+.vscode/
+
+# Backup files
+*~
+*.bak
+
+# SDL2 generated files (if any)
+*.dll
+
+# Logs
+*.log
+
+# MacOS/Windows
