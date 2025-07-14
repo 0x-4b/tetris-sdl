@@ -2,7 +2,7 @@
 #define _IO_
 
 #include <SDL2/SDL.h>
-
+#include <iostream>
 class IO
 {
 public:
