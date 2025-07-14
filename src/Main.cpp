@@ -1,6 +1,6 @@
 #include "Game.h"
 
-IO mIO;
+IO mIO (BOARD_WIDTH, BOARD_HEIGHT);
 int mScreenHeight = mIO.GetScreenHeight();
 
 Pieces mPieces;
