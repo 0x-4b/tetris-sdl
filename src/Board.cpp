@@ -70,10 +70,7 @@ void Board::DeletePossibleLines()
 
 bool Board::IsFreeBlock(int pX, int pY)
 {
-    if (mBoard[pX][pY] == POS_FILLED)
-        return true;
-    else
-        return false;
+    return mBoard[pX][pY] == POS_FREE;
 }
 
 int Board::GetXPosInPixels(int pPos)
