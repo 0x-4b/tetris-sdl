@@ -79,7 +79,10 @@ void IO::Present() {
     SDL_RenderPresent(mRenderer);
 }
 
-int IO::PollEvent(SDL_Event &e) {}
+int IO::PollEvent(SDL_Event &e) {
+   return SDL_PollEvent(&e);
+}
+
 int IO::isKeyDown(SDL_Scancode pKey) {}
 int IO::GetScreenHeight() const
 {
