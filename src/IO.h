@@ -3,18 +3,22 @@
 
 #include <SDL2/SDL.h>
 
-enum color {BLACK, RED, GREEN, BLUE, CYAN, MAGENTA, YELLOW, WHITE, COLOR_MAX};
+class IO
+{
+public:
+    IO();
+    ~IO();
+    void ClearScreen();
+    void DrawRectangle(int pX1, int pY1, int pX2, int pY2, SDL_Color pC);
+    void Present();
+    int PollEvent(SDL_Event &e);
+    int isKeyDown(SDL_Scancode pKey);
+    int GetScreenHeight() const;
 
-class IO {
-    public :
-        void DrawRectangle(int pX1, int pY1, int pX2, int pY2, enum color pC);
-        void ClearScreen();
-        int GetScreenHeight();
-        int InitGraph();
-        int PollKey();
-        int GetKey();
-        int isKeyDown (int pKey);
-        void UpdateScreen();
+private:
+    SDL_Window *mWindow;
+    SDL_Renderer *mRenderer;
+    int mWidth, mHeight;
 };
 
 #endif // _IO_
