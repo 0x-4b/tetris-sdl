@@ -50,7 +50,7 @@ void Game::DrawPiece(int pX, int pY, int pPiece, int pRotation)
     {
         for (int j = 0; j < PIECE_BLOCKS; ++j)
         {
-            switch (mPieces->GetBlockType(pPiece, pRotation, j, i) != 0)
+            switch (mPieces->GetBlockType(pPiece, pRotation, j, i))
             {
             case 1:
                 mColor = GREEN;
