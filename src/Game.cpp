@@ -1,5 +1,14 @@
 #include "Game.h"
 
+Game::Game(Board *pBoard, Pieces *pPiece, IO *pIO, int pScreenHeight)
+{
+    mBoard = pBoard;
+    mPieces = pPiece;
+    mIO = pIO;
+    mScreenHeight = pScreenHeight;
+    InitGame();
+}
+
 void Game::DrawScene()
 {
     DrawBoard();
