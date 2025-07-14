@@ -26,7 +26,7 @@ private:
 
     Board *mBoard;
     Pieces *mPieces;
-    IO **mIO;
+    IO *mIO;
 
     int GetRand(int pA, int pB);
     void InitGame();
