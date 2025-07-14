@@ -63,7 +63,18 @@ void IO::ClearScreen()
 
 void IO::DrawRectangle(int pX1, int pY1, int pX2, int pY2, SDL_Color pC)
 {
+    SDL_SetRenderDrawColor(mRenderer, pC.r, pC.g, pC.b, pC.a);
+
+    int x = std::min(pX1, pX2);
+    int y = std::min(pY1, pY2);
+    int width = abs(pX2 - pX1);
+    int height = abs(pY2 - pY1);
+
+    SDL_Rect rect = {x, y, width, height};
+
+    SDL_RenderFillRect(mRenderer, &rect);
 }
+
 void IO::Present() {}
 int IO::PollEvent(SDL_Event &e) {}
 int IO::isKeyDown(SDL_Scancode pKey) {}
