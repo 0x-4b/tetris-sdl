@@ -15,7 +15,8 @@ int main(int argc, char* argv[])
     if (!mIO.Init()) {
         return 1;
     }
-    while (!mIO.isKeyDown(SDL_SCANCODE_ESCAPE))
+    bool running = true;
+    while (running)
     {
         mIO.ClearScreen();
         mGame.DrawScene();
@@ -23,7 +24,7 @@ int main(int argc, char* argv[])
         SDL_Event e;
         while (SDL_PollEvent(&e)) {
             if (e.type == SDL_QUIT) {
-                return 0;
+                running = false;
             }
             if (e.type == SDL_KEYDOWN) {
                 switch (e.key.keysym.sym) {
@@ -49,7 +50,7 @@ int main(int argc, char* argv[])
                         if (mBoard.IsGameOver())
                         {
                             SDL_Delay(3000);
-                            exit(0);
+                            running = false;
                         }
                         mGame.CreateNewPiece();
                         break;
@@ -60,7 +61,8 @@ int main(int argc, char* argv[])
                         }
                         break;
                     case SDLK_ESCAPE:
-                        return 0;
+                        running = false;
+                        break;
                 }
             }
         }
@@ -77,8 +79,10 @@ int main(int argc, char* argv[])
                 mBoard.DeletePossibleLines();
 
                 if (mBoard.IsGameOver())
+                {
                     SDL_Delay(3000);
-                exit(0);
+                    running = false;
+                }
 
                 mGame.CreateNewPiece();
             }
