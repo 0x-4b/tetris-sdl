@@ -75,15 +75,22 @@ void IO::DrawRectangle(int pX1, int pY1, int pX2, int pY2, SDL_Color pC)
     SDL_RenderFillRect(mRenderer, &rect);
 }
 
-void IO::Present() {
+void IO::Present()
+{
     SDL_RenderPresent(mRenderer);
 }
 
-int IO::PollEvent(SDL_Event &e) {
-   return SDL_PollEvent(&e);
+int IO::PollEvent(SDL_Event &e)
+{
+    return SDL_PollEvent(&e);
 }
 
-int IO::isKeyDown(SDL_Scancode pKey) {}
+int IO::isKeyDown(SDL_Scancode pKey)
+{
+    const Uint8 *keyboardState = SDL_GetKeyboardState(NULL);
+    return keyboardState[pKey];
+}
+
 int IO::GetScreenHeight() const
 {
 }
