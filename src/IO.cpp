@@ -93,4 +93,5 @@ int IO::isKeyDown(SDL_Scancode pKey)
 
 int IO::GetScreenHeight() const
 {
+    return mHeight;
 }
