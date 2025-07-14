@@ -67,8 +67,8 @@ void IO::DrawRectangle(int pX1, int pY1, int pX2, int pY2, SDL_Color pC)
 
     int x = std::min(pX1, pX2);
     int y = std::min(pY1, pY2);
-    int width = abs(pX2 - pX1);
-    int height = abs(pY2 - pY1);
+    int width = abs(pX2 - pX1) + 1;
+    int height = abs(pY2 - pY1) + 1;
 
     SDL_Rect rect = {x, y, width, height};
 

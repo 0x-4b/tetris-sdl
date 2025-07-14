@@ -84,11 +84,11 @@ void Game::DrawPiece(int pX, int pY, int pPiece, int pRotation)
 void Game::DrawBoard()
 {
     int mX1 = BOARD_POSITION - (BLOCK_SIZE * (BOARD_WIDTH / 2)) - 1;
-    int mX2 = BOARD_POSITION + (BLOCK_SIZE * (BOARD_WIDTH / 2)) - 1;
+    int mX2 = BOARD_POSITION + (BLOCK_SIZE * (BOARD_WIDTH / 2));
     int mY = mScreenHeight - (BLOCK_SIZE * BOARD_HEIGHT);
 
     mIO->DrawRectangle(mX1 - BOARD_LINE_WIDTH, mY, mX1, mScreenHeight - 1, BLUE);
-    mIO->DrawRectangle(mX2, mY, BOARD_LINE_WIDTH, mScreenHeight - 1, BLUE);
+    mIO->DrawRectangle(mX2, mY, mX2 + BOARD_LINE_WIDTH, mScreenHeight - 1, BLUE);
 
     mX1 += 1;
     for (int i = 0; i < BOARD_WIDTH; ++i)
