@@ -75,7 +75,10 @@ void IO::DrawRectangle(int pX1, int pY1, int pX2, int pY2, SDL_Color pC)
     SDL_RenderFillRect(mRenderer, &rect);
 }
 
-void IO::Present() {}
+void IO::Present() {
+    SDL_RenderPresent(mRenderer);
+}
+
 int IO::PollEvent(SDL_Event &e) {}
 int IO::isKeyDown(SDL_Scancode pKey) {}
 int IO::GetScreenHeight() const
