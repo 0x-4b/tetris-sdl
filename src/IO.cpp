@@ -8,7 +8,17 @@ IO::IO(int pWidth, int pHeight)
     mWindow = nullptr;
     mRenderer = nullptr;
 }
-IO::~IO() {}
+
+IO::~IO()
+{
+    SDL_DestroyWindow(mWindow);
+    mWindow = nullptr;
+
+    SDL_DestroyRenderer(mRenderer);
+    mRenderer = nullptr;
+
+    SDL_Quit();
+}
 bool IO::Init()
 {
 }
