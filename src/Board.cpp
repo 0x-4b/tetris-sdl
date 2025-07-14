@@ -31,6 +31,8 @@ bool Board::IsGameOver()
             return true;
         return false;
     }
+
+    return true;
 }
 
 void Board::DeleteLine(int pY)
@@ -102,6 +104,6 @@ bool Board::IsPossibleMovement(int pX, int pY, int pPiece, int pRotation)
                 }
             }
         }
-        return true;
     }
+    return true;
 }
