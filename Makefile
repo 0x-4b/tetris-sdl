@@ -1,5 +1,3 @@
- for Tetris SDL project
-
 CXX := g++
 CXXFLAGS := -Wall -std=c++17 `sdl2-config --cflags`
 LDFLAGS := `sdl2-config --libs`
