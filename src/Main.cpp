@@ -12,6 +12,9 @@ Uint32 mTime1 = SDL_GetTicks();
 
 int main(int argc, char* argv[])
 {
+    if (!mIO.Init()) {
+        return 1;
+    }
     while (!mIO.isKeyDown(SDL_SCANCODE_ESCAPE))
     {
         mIO.ClearScreen();
