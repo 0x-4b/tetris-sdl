@@ -55,7 +55,11 @@ bool IO::Init()
     return success;
 }
 
-void IO::ClearScreen() {}
+void IO::ClearScreen()
+{
+    SDL_SetRenderDrawColor(mRenderer, 0xff, 0xff, 0xff, 0xff);
+    SDL_RenderClear(mRenderer);
+}
 
 void IO::DrawRectangle(int pX1, int pY1, int pX2, int pY2, SDL_Color pC)
 {
