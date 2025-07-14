@@ -26,7 +26,9 @@ void Board::StorePiece(int pX, int pY, int pPiece, int pRotation)
         {
             if (mPieces->GetBlockType(pPiece, pRotation, j2, i2) != 0)
             {
-                mBoard[i1][j1] = POS_FILLED;
+                // Only store if inside board!
+                if (i1 >= 0 && i1 < BOARD_WIDTH && j1 >= 0 && j1 < BOARD_HEIGHT)
+                    mBoard[i1][j1] = POS_FILLED;
             }
         }
     }
@@ -51,6 +53,11 @@ void Board::DeleteLine(int pY)
             mBoard[i][j] = mBoard[i][j - 1];
         }
     }
+    // Clear the top line
+    for (int i = 0; i < BOARD_WIDTH; ++i)
+    {
+        mBoard[i][0] = POS_FREE;
+    }
 }
 
 void Board::DeletePossibleLines()
@@ -66,7 +73,10 @@ void Board::DeletePossibleLines()
         }
 
         if (i == BOARD_WIDTH)
+        {
             DeleteLine(j);
+            --j; // Check the same line again after deletion
+        }
     }
 }
 
