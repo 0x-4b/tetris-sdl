@@ -52,8 +52,8 @@ void Game::DrawPiece(int pX, int pY, int pPiece, int pRotation)
 {
     SDL_Color mColor;
 
-    int mPixelsX = mBoard->GetXPosInPixels(pY);
-    int mPixelsY = mBoard->GetYPosInPixels(pX);
+    int mPixelsX = mBoard->GetXPosInPixels(pX); 
+    int mPixelsY = mBoard->GetYPosInPixels(pY); 
 
     for (int i = 0; i < PIECE_BLOCKS; ++i)
     {
@@ -71,10 +71,10 @@ void Game::DrawPiece(int pX, int pY, int pPiece, int pRotation)
 
             if (mPieces->GetBlockType(pPiece, pRotation, j, i) != 0)
             {
-                mIO->DrawRectangle((mPixelsX + i * BLOCK_SIZE),
-                                   (mPixelsY + j * BLOCK_SIZE),
-                                   ((mPixelsX + i * BLOCK_SIZE) + BLOCK_SIZE - 1),
-                                   ((mPixelsY + j * BLOCK_SIZE) + BLOCK_SIZE - 1),
+                mIO->DrawRectangle((mPixelsX + j * BLOCK_SIZE),
+                                   (mPixelsY + i * BLOCK_SIZE),
+                                   ((mPixelsX + j * BLOCK_SIZE) + BLOCK_SIZE - 1),
+                                   ((mPixelsY + i * BLOCK_SIZE) + BLOCK_SIZE - 1),
                                    mColor);
             }
         }
