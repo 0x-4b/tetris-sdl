@@ -36,10 +36,8 @@ bool Board::IsGameOver()
     {
         if (mBoard[i][0] == POS_FILLED)
             return true;
-        return false;
     }
-
-    return true;
+    return false;
 }
 
 void Board::DeleteLine(int pY)
