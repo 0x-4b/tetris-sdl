@@ -21,46 +21,47 @@ int main(int argc, char* argv[])
         mGame.DrawScene();
         mIO.Present();
         SDL_Event e;
-        int mKey = mIO.PollEvent(e);
-        switch (mKey)
-        {
-        case SDLK_RIGHT:
-            if (mBoard.IsPossibleMovement(mGame.mPosX + 1, mGame.mPosY, mGame.mPiece, mGame.mRotation))
-                mGame.mPosX++;
-            break;
-
-        case SDLK_LEFT:
-            if (mBoard.IsPossibleMovement(mGame.mPosX - 1, mGame.mPosY, mGame.mPiece, mGame.mRotation))
-                mGame.mPosX--;
-            break;
-
-        case SDLK_DOWN:
-            if (mBoard.IsPossibleMovement(mGame.mPosX, mGame.mPosY + 1, mGame.mPiece, mGame.mRotation))
-                mGame.mPosY++;
-            break;
-
-        case SDLK_x:
-            while (mBoard.IsPossibleMovement(mGame.mPosX, mGame.mPosY + 1, mGame.mPiece, mGame.mRotation))
-            {
-                mGame.mPosY++;
+        while (SDL_PollEvent(&e)) {
+            if (e.type == SDL_QUIT) {
+                return 0;
             }
-
-            mBoard.StorePiece(mGame.mPosX, mGame.mPosY - 1, mGame.mPiece, mGame.mRotation);
-            mBoard.DeletePossibleLines();
-
-            if (mBoard.IsGameOver())
-            {
-                SDL_Delay(3000);
-                exit(0);
-            }
-            mGame.CreateNewPiece();
-            break;
-
-        case SDLK_z:
-
-            if (mBoard.IsPossibleMovement(mGame.mPosX, mGame.mPosY, mGame.mPiece, (mGame.mRotation + 1) % 4))
-            {
-                mGame.mRotation = (mGame.mRotation + 1) % 4;
+            if (e.type == SDL_KEYDOWN) {
+                switch (e.key.keysym.sym) {
+                    case SDLK_RIGHT:
+                        if (mBoard.IsPossibleMovement(mGame.mPosX + 1, mGame.mPosY, mGame.mPiece, mGame.mRotation))
+                            mGame.mPosX++;
+                        break;
+                    case SDLK_LEFT:
+                        if (mBoard.IsPossibleMovement(mGame.mPosX - 1, mGame.mPosY, mGame.mPiece, mGame.mRotation))
+                            mGame.mPosX--;
+                        break;
+                    case SDLK_DOWN:
+                        if (mBoard.IsPossibleMovement(mGame.mPosX, mGame.mPosY + 1, mGame.mPiece, mGame.mRotation))
+                            mGame.mPosY++;
+                        break;
+                    case SDLK_x:
+                        while (mBoard.IsPossibleMovement(mGame.mPosX, mGame.mPosY + 1, mGame.mPiece, mGame.mRotation))
+                        {
+                            mGame.mPosY++;
+                        }
+                        mBoard.StorePiece(mGame.mPosX, mGame.mPosY - 1, mGame.mPiece, mGame.mRotation);
+                        mBoard.DeletePossibleLines();
+                        if (mBoard.IsGameOver())
+                        {
+                            SDL_Delay(3000);
+                            exit(0);
+                        }
+                        mGame.CreateNewPiece();
+                        break;
+                    case SDLK_z:
+                        if (mBoard.IsPossibleMovement(mGame.mPosX, mGame.mPosY, mGame.mPiece, (mGame.mRotation + 1) % 4))
+                        {
+                            mGame.mRotation = (mGame.mRotation + 1) % 4;
+                        }
+                        break;
+                    case SDLK_ESCAPE:
+                        return 0;
+                }
             }
         }
 
