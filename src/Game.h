@@ -7,6 +7,8 @@
 #include <time.h>
 
 #define WAIT_TIME 700
+const SDL_Color GREEN = {0x00, 0xff, 0x00, 0xff};
+const SDL_Color BLUE = {0x00, 0x00, 0xff, 0xff};
 
 class Game
 {
