@@ -10,7 +10,7 @@ Game mGame(&mBoard, &mPieces, &mIO, mScreenHeight);
 
 Uint32 mTime1 = SDL_GetTicks();
 
-int main()
+int main(int argc, char* argv[])
 {
     while (!mIO.isKeyDown(SDL_SCANCODE_ESCAPE))
     {
