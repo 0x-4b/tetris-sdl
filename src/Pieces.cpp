@@ -3,7 +3,7 @@
 /*
 [kind][rotation][horizontal][vertical]
 */
-char mPieces[7][4][5][5] =
+static const char gPieces[7][4][5][5] =
     {
         {
             // Square
@@ -233,11 +233,11 @@ char mPieces[7][4][5][5] =
         },
 };
 
-// Displacement to the posiotion where first drawn
+// Displacement to the position where first drawn
 /*
 [kind][rotation][position]
  */
-int mPiecesInitialPosition[7][4][2] = {
+static const int gPiecesInitialPosition[7][4][2] = {
     {
         // Square
         {-2, -3},
@@ -293,14 +293,14 @@ int mPiecesInitialPosition[7][4][2] = {
 
 int Pieces::GetBlockType(int pPiece, int pRotation, int pX, int pY)
 {
-    return mPieces[pPiece][pRotation][pX][pY];
+    return gPieces[pPiece][pRotation][pX][pY];
 }
 int Pieces::GetXInitialPosition(int pPiece, int pRotation)
 {
-    return mPiecesInitialPosition[pPiece][pRotation][0];
+    return gPiecesInitialPosition[pPiece][pRotation][0];
 }
 int Pieces::GetYInitialPosition(int pPiece, int pRotation)
 {
 
-    return mPiecesInitialPosition[pPiece][pRotation][1];
+    return gPiecesInitialPosition[pPiece][pRotation][1];
 }
