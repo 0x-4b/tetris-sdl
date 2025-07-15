@@ -2,7 +2,7 @@
 
 int main(int argc, char *argv[])
 {
-    IO mIO(800, 600); // Use a large enough window
+    IO mIO(BOARD_POSITION * 2, 600);
     if (!mIO.Init())
     {
         return 1;
