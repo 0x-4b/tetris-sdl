@@ -48,7 +48,7 @@ int main(int argc, char *argv[])
                     {
                         mGame.mPosY++;
                     }
-                    mBoard.StorePiece(mGame.mPosX, mGame.mPosY - 1, mGame.mPiece, mGame.mRotation);
+                    mBoard.StorePiece(mGame.mPosX, mGame.mPosY, mGame.mPiece, mGame.mRotation);
                     mBoard.DeletePossibleLines();
                     if (mBoard.IsGameOver())
                     {
