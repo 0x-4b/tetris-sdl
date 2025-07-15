@@ -12,15 +12,16 @@ public:
     ~Font();
     bool init();
     bool LoadFromRenderedText(TTF_Font *pFont, std::string pText, SDL_Color pColor, SDL_Renderer *pRenderer);
-    bool LoadMedia(std::string pText, std::string pPath, TTF_Font *pFont, int pFontSize, SDL_Color pColor, SDL_Renderer* pRenderer);
+    bool LoadMedia(std::string pText, std::string pPath, int pFontSize, SDL_Color pColor, SDL_Renderer* pRenderer);
 
     void render(int pX, int pY, SDL_Rect *pClip, SDL_Renderer *pRenderer);
 
-    int GetWidht();
+    int GetWidth();
     int GetHeight();
 
 private:
     SDL_Texture *mTexture;
     int mWidth, mHeight;
 };
-#endif // _FONT_
+
+#endif //

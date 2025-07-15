@@ -9,12 +9,11 @@ Font::Font()
 
 Font::~Font()
 {
-    SDL_DestroyTexture(mTexture);
+    if (mTexture) SDL_DestroyTexture(mTexture);
     mTexture = nullptr;
-
     mWidth = 0;
     mHeight = 0;
-    TTF_Quit();
+    // Do not call TTF_Quit() here unless you are sure this is the last font!
 }
 
 bool Font::init()
@@ -29,7 +28,6 @@ bool Font::init()
 
 bool Font::LoadFromRenderedText(TTF_Font *pFont, std::string pText, SDL_Color pColor, SDL_Renderer *pRenderer)
 {
-
     SDL_Surface *TextSurface = TTF_RenderText_Solid(pFont, pText.c_str(), pColor);
     if (TextSurface == nullptr)
     {
@@ -38,43 +36,37 @@ bool Font::LoadFromRenderedText(TTF_Font *pFont, std::string pText, SDL_Color pC
     else
     {
         mTexture = SDL_CreateTextureFromSurface(pRenderer, TextSurface);
-        if (mTexture = nullptr)
+        if (mTexture == nullptr)
         {
-
             std::cout << "Could not create texture. SDL_Error: " << SDL_GetError() << '\n';
         }
-
         else
         {
             mWidth = TextSurface->w;
             mHeight = TextSurface->h;
         }
-
         SDL_FreeSurface(TextSurface);
     }
-
     return mTexture != nullptr;
 }
 
-bool Font::LoadMedia(std::string pText, std::string pPath, TTF_Font *pFont, int pFontSize, SDL_Color pColor, SDL_Renderer *pRenderer)
+bool Font::LoadMedia(std::string pText, std::string pPath, int pFontSize, SDL_Color pColor, SDL_Renderer *pRenderer)
 {
-
     bool success = true;
-
-    pFont = TTF_OpenFont(pPath.c_str(), pFontSize);
+    TTF_Font *pFont = TTF_OpenFont(pPath.c_str(), pFontSize);
     if (pFont == nullptr)
     {
         std::cout << "Could not open font. TTF_Error: " << TTF_GetError() << '\n';
         success = false;
     }
-
     else
     {
-        if (!this->LoadFromRenderedText(pFont, pText.c_str(), pColor, pRenderer))
+        if (!this->LoadFromRenderedText(pFont, pText, pColor, pRenderer))
         {
             std::cout << "Failed to render text\n";
             success = false;
         }
+        TTF_CloseFont(pFont);
     }
     return success;
 }
@@ -92,7 +84,7 @@ void Font::render(int pX, int pY, SDL_Rect *pClip, SDL_Renderer *pRenderer)
     SDL_RenderCopy(pRenderer, mTexture, pClip, &renderQuad);
 }
 
-int Font::GetWidht()
+int Font::GetWidth()
 {
     return mWidth;
 }
