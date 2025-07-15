@@ -57,7 +57,7 @@ bool IO::Init()
 
 void IO::ClearScreen()
 {
-    SDL_SetRenderDrawColor(mRenderer, 0xff, 0xff, 0xff, 0xff);
+    SDL_SetRenderDrawColor(mRenderer, 0x26, 0x26, 0x26, 0xff);
     SDL_RenderClear(mRenderer);
 }
 
