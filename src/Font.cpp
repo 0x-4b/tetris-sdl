@@ -1,19 +1,11 @@
 #include "Font.h"
 
-Font::Font()
-{
-    mTexture = nullptr;
-    mWidth = 0;
-    mHeight = 0;
-}
+Font::Font() : mFont(nullptr), mTexture(nullptr), mWidth(0), mHeight(0) {}
 
 Font::~Font()
 {
     if (mTexture) SDL_DestroyTexture(mTexture);
-    mTexture = nullptr;
-    mWidth = 0;
-    mHeight = 0;
-    // Do not call TTF_Quit() here unless you are sure this is the last font!
+    if (mFont) TTF_CloseFont(mFont);
 }
 
 bool Font::init()
@@ -26,49 +18,37 @@ bool Font::init()
     return true;
 }
 
-bool Font::LoadFromRenderedText(TTF_Font *pFont, std::string pText, SDL_Color pColor, SDL_Renderer *pRenderer)
+bool Font::LoadFont(const std::string& path, int size)
 {
-    SDL_Surface *TextSurface = TTF_RenderText_Solid(pFont, pText.c_str(), pColor);
-    if (TextSurface == nullptr)
-    {
-        std::cout << "Could not render text surface. TTF_Error: " << TTF_GetError() << '\n';
-    }
-    else
-    {
-        mTexture = SDL_CreateTextureFromSurface(pRenderer, TextSurface);
-        if (mTexture == nullptr)
-        {
-            std::cout << "Could not create texture. SDL_Error: " << SDL_GetError() << '\n';
-        }
-        else
-        {
-            mWidth = TextSurface->w;
-            mHeight = TextSurface->h;
-        }
-        SDL_FreeSurface(TextSurface);
-    }
-    return mTexture != nullptr;
-}
-
-bool Font::LoadMedia(std::string pText, std::string pPath, int pFontSize, SDL_Color pColor, SDL_Renderer *pRenderer)
-{
-    bool success = true;
-    TTF_Font *pFont = TTF_OpenFont(pPath.c_str(), pFontSize);
-    if (pFont == nullptr)
+    mFont = TTF_OpenFont(path.c_str(), size);
+    if (!mFont)
     {
         std::cout << "Could not open font. TTF_Error: " << TTF_GetError() << '\n';
-        success = false;
+        return false;
     }
-    else
+    return true;
+}
+
+bool Font::RenderText(const std::string& text, SDL_Color color, SDL_Renderer* renderer)
+{
+    if (mTexture) SDL_DestroyTexture(mTexture);
+    SDL_Surface* textSurface = TTF_RenderText_Solid(mFont, text.c_str(), color);
+    if (!textSurface)
     {
-        if (!this->LoadFromRenderedText(pFont, pText, pColor, pRenderer))
-        {
-            std::cout << "Failed to render text\n";
-            success = false;
-        }
-        TTF_CloseFont(pFont);
+        std::cout << "Could not render text surface. TTF_Error: " << TTF_GetError() << '\n';
+        return false;
     }
-    return success;
+    mTexture = SDL_CreateTextureFromSurface(renderer, textSurface);
+    if (!mTexture)
+    {
+        std::cout << "Could not create texture. SDL_Error: " << SDL_GetError() << '\n';
+        SDL_FreeSurface(textSurface);
+        return false;
+    }
+    mWidth = textSurface->w;
+    mHeight = textSurface->h;
+    SDL_FreeSurface(textSurface);
+    return true;
 }
 
 void Font::render(int pX, int pY, SDL_Rect *pClip, SDL_Renderer *pRenderer)
