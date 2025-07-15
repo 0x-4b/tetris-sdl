@@ -1,6 +1,6 @@
 CXX := g++
 CXXFLAGS := -Wall -std=c++17 `sdl2-config --cflags`
-LDFLAGS := `sdl2-config --libs`
+LDFLAGS := `sdl2-config --libs` -lSDL2_ttf
 SRC_DIR := d:/tetris-sdl/src
 SRCS := $(wildcard $(SRC_DIR)/*.cpp)
 OBJS := $(SRCS:.cpp=.o)
