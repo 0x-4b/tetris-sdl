@@ -53,6 +53,8 @@ int main(int argc, char *argv[])
         case GAME_OVER:
             ShowGameOver(mIO, mFont, state);
             break;
+        default:
+            break;
         }
     }
 
