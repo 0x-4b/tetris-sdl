@@ -13,6 +13,7 @@ public:
     bool Init();
     void Present();
     int GetScreenHeight() const;
+    SDL_Renderer* GetRenderer() const;
 
 private:
     SDL_Window *mWindow;

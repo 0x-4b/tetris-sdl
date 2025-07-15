@@ -84,3 +84,8 @@ int IO::GetScreenHeight() const
 {
     return mHeight;
 }
+
+SDL_Renderer *IO::GetRenderer() const
+{
+    return mRenderer;
+}
