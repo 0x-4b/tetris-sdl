@@ -20,15 +20,13 @@ void Board::InitBoard()
 
 void Board::StorePiece(int pX, int pY, int pPiece, int pRotation)
 {
-    for (int i1 = pX, i2 = 0; i2 < PIECE_BLOCKS; ++i1, ++i2)
+    for (int i1 = pX, i2 = 0; i1 < pX + PIECE_BLOCKS; ++i1, ++i2)
     {
-        for (int j1 = pY, j2 = 0; j2 < PIECE_BLOCKS; ++j1, ++j2)
+        for (int j1 = pY, j2 = 0; j1 < pY + PIECE_BLOCKS; ++j1, ++j2)
         {
             if (mPieces->GetBlockType(pPiece, pRotation, j2, i2) != 0)
             {
-                // Only store if inside board!
-                if (i1 >= 0 && i1 < BOARD_WIDTH && j1 >= 0 && j1 < BOARD_HEIGHT)
-                    mBoard[i1][j1] = POS_FILLED;
+                mBoard[i1][j1] = POS_FILLED;
             }
         }
     }
@@ -53,11 +51,6 @@ void Board::DeleteLine(int pY)
             mBoard[i][j] = mBoard[i][j - 1];
         }
     }
-    // Clear the top line
-    for (int i = 0; i < BOARD_WIDTH; ++i)
-    {
-        mBoard[i][0] = POS_FREE;
-    }
 }
 
 void Board::DeletePossibleLines()
@@ -75,7 +68,6 @@ void Board::DeletePossibleLines()
         if (i == BOARD_WIDTH)
         {
             DeleteLine(j);
-            --j; // Check the same line again after deletion
         }
     }
 }
@@ -97,18 +89,18 @@ int Board::GetYPosInPixels(int pPos)
 
 bool Board::IsPossibleMovement(int pX, int pY, int pPiece, int pRotation)
 {
-    for (int i1 = pX, i2 = 0; i2 < PIECE_BLOCKS; ++i1, ++i2)
+    for (int i1 = pX, i2 = 0; i1 < pX + PIECE_BLOCKS; ++i1, ++i2)
     {
-        for (int j1 = pY, j2 = 0; j2 < PIECE_BLOCKS; ++j1, ++j2)
+        for (int j1 = pY, j2 = 0; j1 < pY + PIECE_BLOCKS; ++j1, ++j2)
         {
             if (mPieces->GetBlockType(pPiece, pRotation, j2, i2) != 0)
             {
-                // Check board limits
-                if (i1 < 0 || i1 >= BOARD_WIDTH || j1 < 0 || j1 >= BOARD_HEIGHT)
-                    return false;
-                // Check if the block is free
-                if (!IsFreeBlock(i1, j1))
-                    return false;
+                return true;
+            }
+
+            if (mPieces->GetBlockType(pPiece, pRotation, j2, i2) != 0 && (!IsFreeBlock(i1, j1)))
+            {
+                return false;
             }
         }
     }
