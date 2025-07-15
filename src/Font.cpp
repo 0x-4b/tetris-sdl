@@ -92,5 +92,11 @@ void Font::render(int pX, int pY, SDL_Rect *pClip, SDL_Renderer *pRenderer)
     SDL_RenderCopy(pRenderer, mTexture, pClip, &renderQuad);
 }
 
-int Font::GetWidht() {}
-int Font::GetHeight() {}
+int Font::GetWidht()
+{
+    return mWidth;
+}
+int Font::GetHeight()
+{
+    return mHeight;
+}
