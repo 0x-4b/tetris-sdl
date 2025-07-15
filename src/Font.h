@@ -2,13 +2,13 @@
 #define _FONT_
 
 #include <SDL2/SDL_ttf.h>
+#include <iostream>
 #include <string>
 
 class Font
 {
 public:
     Font();
-    ~Font();
 
     bool init();
     bool LoadFromRenderedText(std::string pText, SDL_Color pColor);
