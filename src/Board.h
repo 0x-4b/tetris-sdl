@@ -4,8 +4,8 @@
 #include "Pieces.h"
 
 #define BOARD_LINE_WIDTH 6
-#define BLOCK_SIZE 16
-#define BOARD_POSITION 320
+#define BLOCK_SIZE 24
+#define BOARD_POSITION 400
 #define BOARD_WIDTH 10
 #define BOARD_HEIGHT 20
 #define MIN_VERTICAL_MARGIN 20
