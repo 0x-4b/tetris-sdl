@@ -31,7 +31,7 @@ int main(int argc, char *argv[])
     {
         return 1;
     }
-    if (!mFont.LoadFont("./data/font.ttf", 26))
+    if (!mFont.LoadFont("./data/font.ttf", 40))
     {
         return 1;
     }
