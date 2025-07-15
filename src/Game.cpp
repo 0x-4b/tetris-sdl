@@ -106,3 +106,10 @@ void Game::DrawBoard()
         }
     }
 }
+
+void Game::Reset() {
+    mPosX = (BOARD_WIDTH / 2) + mPieces->GetXInitialPosition(0, 0);
+    mPosY = mPieces->GetYInitialPosition(0, 0);
+    mPiece = 0;
+    mRotation = 0;
+}

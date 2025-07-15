@@ -25,6 +25,7 @@ public:
     void StorePiece(int pX, int pY, int pPiece, int pRotation);
     void DeletePossibleLines();
     bool IsGameOver();
+    void Reset();
 
 private:
     enum

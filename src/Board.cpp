@@ -107,3 +107,10 @@ bool Board::IsPossibleMovement(int pX, int pY, int pPiece, int pRotation)
     }
     return true;
 }
+
+void Board::Reset()
+{
+    for (int i = 0; i < BOARD_WIDTH; ++i)
+        for (int j = 0; j < BOARD_HEIGHT; ++j)
+            mBoard[i][j] = POS_FREE;
+}

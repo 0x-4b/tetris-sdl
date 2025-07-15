@@ -18,6 +18,7 @@ public:
 
     void DrawScene();
     void CreateNewPiece();
+    void Reset();
 
     int mPosX, mPosY;
     int mPiece, mRotation;
