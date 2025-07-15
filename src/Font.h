@@ -12,7 +12,7 @@ public:
     ~Font();
     bool init();
     bool LoadFromRenderedText(TTF_Font *pFont, std::string pText, SDL_Color pColor, SDL_Renderer *pRenderer);
-    bool LoadMedia(std::string pText);
+    bool LoadMedia(std::string pText, std::string pPath, TTF_Font *pFont, int pFontSize, SDL_Color pColor, SDL_Renderer* pRenderer);
 
     void render(int pX, int pY, SDL_Rect *pClip, SDL_Renderer *pRenderer);
 

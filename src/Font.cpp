@@ -55,9 +55,42 @@ bool Font::LoadFromRenderedText(TTF_Font *pFont, std::string pText, SDL_Color pC
 
     return mTexture != nullptr;
 }
-bool Font::LoadMedia(std::string pText) {}
 
-void Font::render(int pX, int pY, SDL_Rect *pClip, SDL_Renderer *pRenderer) {}
+bool Font::LoadMedia(std::string pText, std::string pPath, TTF_Font *pFont, int pFontSize, SDL_Color pColor, SDL_Renderer *pRenderer)
+{
+
+    bool success = true;
+
+    pFont = TTF_OpenFont(pPath.c_str(), pFontSize);
+    if (pFont == nullptr)
+    {
+        std::cout << "Could not open font. TTF_Error: " << TTF_GetError() << '\n';
+        success = false;
+    }
+
+    else
+    {
+        if (!this->LoadFromRenderedText(pFont, pText.c_str(), pColor, pRenderer))
+        {
+            std::cout << "Failed to render text\n";
+            success = false;
+        }
+    }
+    return success;
+}
+
+void Font::render(int pX, int pY, SDL_Rect *pClip, SDL_Renderer *pRenderer)
+{
+    SDL_Rect renderQuad = {pX, pY, mWidth, mHeight};
+
+    if (pClip != nullptr)
+    {
+        renderQuad.w = pClip->w;
+        renderQuad.h = pClip->h;
+    }
+
+    SDL_RenderCopy(pRenderer, mTexture, pClip, &renderQuad);
+}
 
 int Font::GetWidht() {}
 int Font::GetHeight() {}
