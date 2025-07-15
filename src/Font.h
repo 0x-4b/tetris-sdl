@@ -14,7 +14,7 @@ public:
     bool LoadFromRenderedText(std::string pText, SDL_Color pColor);
     bool LoadMedia(std::string pText);
 
-    void render(int pX, int pY, SDL_Rect *pClip, SDL_Renderer pRenderer);
+    void render(int pX, int pY, SDL_Rect *pClip, SDL_Renderer* pRenderer);
 
     int GetWidht();
     int GetHeight();
