@@ -1,9 +1,10 @@
 #include "Game.h"
 
-int main(int argc, char* argv[])
+int main(int argc, char *argv[])
 {
     IO mIO(800, 600); // Use a large enough window
-    if (!mIO.Init()) {
+    if (!mIO.Init())
+    {
         return 1;
     }
     int mScreenHeight = mIO.GetScreenHeight();
@@ -13,17 +14,21 @@ int main(int argc, char* argv[])
     Game mGame(&mBoard, &mPieces, &mIO, mScreenHeight);
 
     Uint32 mTime1 = SDL_GetTicks();
+    bool quit = false;
+    SDL_Event e;
 
-    while (!mIO.isKeyDown(SDL_SCANCODE_ESCAPE))
+    while (!quit)
     {
         mIO.ClearScreen();
         mGame.DrawScene();
         mIO.Present();
 
-        SDL_Event e;
-        while (SDL_PollEvent(&e)) {
-            if (e.type == SDL_QUIT) return 0;
-            if (e.type == SDL_KEYDOWN) {
+        while (SDL_PollEvent(&e) != 0)
+        {
+            if (e.type == SDL_QUIT)
+                return 0;
+            if (e.type == SDL_KEYDOWN)
+            {
                 switch (e.key.keysym.sym)
                 {
                 case SDLK_RIGHT:
@@ -40,11 +45,13 @@ int main(int argc, char* argv[])
                     break;
                 case SDLK_x:
                     while (mBoard.IsPossibleMovement(mGame.mPosX, mGame.mPosY + 1, mGame.mPiece, mGame.mRotation))
+                    {
                         mGame.mPosY++;
-                    mBoard.StorePiece(mGame.mPosX, mGame.mPosY, mGame.mPiece, mGame.mRotation);
+                    }
+                    mBoard.StorePiece(mGame.mPosX, mGame.mPosY - 1, mGame.mPiece, mGame.mRotation);
                     mBoard.DeletePossibleLines();
-                    if (mBoard.IsGameOver()) {
-                        SDL_Delay(3000);
+                    if (mBoard.IsGameOver())
+                    {
                         return 0;
                     }
                     mGame.CreateNewPiece();
@@ -68,8 +75,8 @@ int main(int argc, char* argv[])
             {
                 mBoard.StorePiece(mGame.mPosX, mGame.mPosY, mGame.mPiece, mGame.mRotation);
                 mBoard.DeletePossibleLines();
-                if (mBoard.IsGameOver()) {
-                    SDL_Delay(3000);
+                if (mBoard.IsGameOver())
+                {
                     return 0;
                 }
                 mGame.CreateNewPiece();
