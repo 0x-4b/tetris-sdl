@@ -93,16 +93,19 @@ bool Board::IsPossibleMovement(int pX, int pY, int pPiece, int pRotation)
     {
         for (int j1 = pY, j2 = 0; j1 < pY + PIECE_BLOCKS; ++j1, ++j2)
         {
-            if (mPieces->GetBlockType(pPiece, pRotation, j2, i2) != 0)
-            {
-                return true;
-            }
 
-            if (mPieces->GetBlockType(pPiece, pRotation, j2, i2) != 0 && (!IsFreeBlock(i1, j1)))
+            if (i1 < 0 || i1 > BOARD_WIDTH - 1 || j1 > BOARD_HEIGHT - 1)
             {
-                return false;
+                if (mPieces->GetBlockType(pPiece, pRotation, j2, i2) != 0)
+                {
+                    return true;
+                }
+
+                if (mPieces->GetBlockType(pPiece, pRotation, j2, i2) != 0 && (!IsFreeBlock(i1, j1)))
+                {
+                    return false;
+                }
             }
         }
+        return true;
     }
-    return true;
-}
