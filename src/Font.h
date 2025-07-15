@@ -11,7 +11,7 @@ public:
     Font();
     ~Font();
     bool init();
-    bool LoadFromRenderedText(std::string pText, SDL_Color pColor);
+    bool LoadFromRenderedText(TTF_Font *pFont, std::string pText, SDL_Color pColor, SDL_Renderer *pRenderer);
     bool LoadMedia(std::string pText);
 
     void render(int pX, int pY, SDL_Rect *pClip, SDL_Renderer *pRenderer);
@@ -20,6 +20,7 @@ public:
     int GetHeight();
 
 private:
+    SDL_Texture *mTexture;
     int mWidth, mHeight;
 };
 #endif // _FONT_
