@@ -109,3 +109,4 @@ bool Board::IsPossibleMovement(int pX, int pY, int pPiece, int pRotation)
         }
         return true;
     }
+}
