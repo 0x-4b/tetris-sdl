@@ -8,7 +8,7 @@
 
 #define WAIT_TIME 700
 
-static SDL_Color pieceColors[7] = {
+SDL_Color pieceColors[7] = {
     {0, 255, 255, 255}, // I (cyan)
     {255, 255, 0, 255}, // O (yellow)
     {128, 0, 128, 255}, // T (purple)
