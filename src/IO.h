@@ -10,10 +10,11 @@ public:
     ~IO();
     void ClearScreen();
     void DrawRectangle(int pX1, int pY1, int pX2, int pY2, SDL_Color pC);
+    void DrawRectangleOutline(int pX1, int pY1, int pX2, int pY2, SDL_Color pC);
     bool Init();
     void Present();
     int GetScreenHeight() const;
-    SDL_Renderer* GetRenderer() const;
+    SDL_Renderer *GetRenderer() const;
 
 private:
     SDL_Window *mWindow;
