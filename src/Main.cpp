@@ -69,9 +69,9 @@ void ShowMainMenu(IO &io, Font &font, GameState &state)
     {
         io.ClearScreen();
         font.RenderText("TETRIS", {255, 255, 255, 255}, io.GetRenderer());
-        font.render(BOARD_WIDTH / 2, 100, nullptr, io.GetRenderer());
+        font.render((800 - font.GetWidth()) / 2, 100, nullptr, io.GetRenderer());
         font.RenderText("Press any key to start", {255, 255, 255, 255}, io.GetRenderer());
-        font.render(BOARD_WIDTH / 2, 200, nullptr, io.GetRenderer());
+        font.render((800 - font.GetWidth()) / 2, 200, nullptr, io.GetRenderer());
         io.Present();
 
         while (SDL_PollEvent(&e))
