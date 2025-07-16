@@ -114,3 +114,8 @@ void Board::Reset()
         for (int j = 0; j < BOARD_HEIGHT; ++j)
             mBoard[i][j] = POS_FREE;
 }
+
+int Board::GetBlockType(int x, int y) const
+{
+    return mBoard[x][y];
+}

@@ -57,17 +57,21 @@ void Game::DrawPiece(int pX, int pY, int pPiece, int pRotation)
     {
         for (int j = 0; j < PIECE_BLOCKS; ++j)
         {
-
             if (mPieces->GetBlockType(pPiece, pRotation, j, i) != 0)
-            {   
+            {
+                SDL_Color fillColor = pieceColors[pPiece];
+                SDL_Color outlineColor = {0, 0, 0, 255}; // black outline
 
-                SDL_Color mColor = pieceColors[pPiece];
+                int x1 = mPixelsX + i * BLOCK_SIZE;
+                int y1 = mPixelsY + j * BLOCK_SIZE;
+                int x2 = x1 + BLOCK_SIZE - 1;
+                int y2 = y1 + BLOCK_SIZE - 1;
 
-                mIO->DrawRectangle((mPixelsX + i * BLOCK_SIZE),
-                                   (mPixelsY + j * BLOCK_SIZE),
-                                   ((mPixelsX + i * BLOCK_SIZE) + BLOCK_SIZE - 1),
-                                   ((mPixelsY + j * BLOCK_SIZE) + BLOCK_SIZE - 1),
-                                   mColor);
+                // Draw filled block
+                mIO->DrawRectangle(x1, y1, x2, y2, fillColor);
+
+                // Draw outline
+                mIO->DrawRectangleOutline(x1, y1, x2, y2, outlineColor);
             }
         }
     }
@@ -79,21 +83,31 @@ void Game::DrawBoard()
     int mX2 = BOARD_POSITION + (BLOCK_SIZE * (BOARD_WIDTH / 2));
     int mY = mScreenHeight - (BLOCK_SIZE * BOARD_HEIGHT);
 
-    mIO->DrawRectangle(mX1 - BOARD_LINE_WIDTH, mY, mX1, mScreenHeight - 1, {0, 0, 0, 0});
-    mIO->DrawRectangle(mX2, mY, mX2 + BOARD_LINE_WIDTH, mScreenHeight - 1, {0, 0, 0, 0});
+    mIO->DrawRectangle(mX1 - BOARD_LINE_WIDTH, mY, mX1, mScreenHeight - 1, {0, 0, 0, 255});
+    mIO->DrawRectangle(mX2, mY, mX2 + BOARD_LINE_WIDTH, mScreenHeight - 1, {0, 0, 0, 255});
 
     mX1 += 1;
+
     for (int i = 0; i < BOARD_WIDTH; ++i)
     {
         for (int j = 0; j < BOARD_HEIGHT; ++j)
         {
-            if (!(mBoard->IsFreeBlock(i, j)))
+            int blockType = mBoard->GetBlockType(i, j); 
+
+            if (blockType != 0) 
             {
-                mIO->DrawRectangle((mX1 + i * BLOCK_SIZE),
-                                   (mY + j * BLOCK_SIZE),
-                                   ((mX1 + i * BLOCK_SIZE) + BLOCK_SIZE - 1),
-                                   ((mY + j * BLOCK_SIZE) + BLOCK_SIZE - 1),
-                                   {0, 0, 0, 0});
+                SDL_Color blockColor = pieceColors[blockType - 1]; 
+
+                int x1 = mX1 + i * BLOCK_SIZE;
+                int y1 = mY + j * BLOCK_SIZE;
+                int x2 = x1 + BLOCK_SIZE - 1;
+                int y2 = y1 + BLOCK_SIZE - 1;
+
+                // Draw filled block with color
+                mIO->DrawRectangle(x1, y1, x2, y2, blockColor);
+
+                // Draw black outline around block
+                mIO->DrawRectangleOutline(x1, y1, x2, y2, {0, 0, 0, 255});
             }
         }
     }

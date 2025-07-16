@@ -26,6 +26,7 @@ public:
     void DeletePossibleLines();
     bool IsGameOver();
     void Reset();
+    int GetBlockType(int x, int y) const;
 
 private:
     enum
