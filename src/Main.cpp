@@ -25,7 +25,7 @@ int main(int argc, char *argv[])
 
     Pieces mPieces;
     Board mBoard(&mPieces, mScreenHeight);
-    Game mGame(&mBoard, &mPieces, &mIO, mScreeHeight);
+    Game mGame(&mBoard, &mPieces, &mIO, mScreenHeight);
     Font mFont;
     if (!mFont.init())
     {
