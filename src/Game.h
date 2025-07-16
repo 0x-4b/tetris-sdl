@@ -7,9 +7,16 @@
 #include <time.h>
 
 #define WAIT_TIME 700
-const SDL_Color GREEN = {0x00, 0xff, 0x00, 0xff};
-const SDL_Color BLUE = {0x00, 0x00, 0xff, 0xff};
-const SDL_Color RED = {0xff, 0x00, 0x00, 0xff};
+
+static SDL_Color pieceColors[7] = {
+    {0, 255, 255, 255}, // I (cyan)
+    {255, 255, 0, 255}, // O (yellow)
+    {128, 0, 128, 255}, // T (purple)
+    {0, 255, 0, 255},   // S (green)
+    {255, 0, 0, 255},   // Z (red)
+    {0, 0, 255, 255},   // J (blue)
+    {255, 165, 0, 255}  // L (orange)
+};
 
 class Game
 {
